@@ -1,0 +1,9 @@
+1650981675613	Delete element
+1650981679105	Delete element
+1650981704265	Delete element
+1650981707245	Delete element
+1650981743622	Rename resource 'application.properties'
+1650982091107	Rename type 'HomeController'
+1650982150176	Rename type 'HomeService'
+1651075231769	Encapsulate field 'cognome'
+1651075383730	Encapsulate field 'telefono'
