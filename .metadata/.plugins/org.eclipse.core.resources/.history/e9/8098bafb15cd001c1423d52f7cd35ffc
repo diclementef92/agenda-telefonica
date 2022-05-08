@@ -1,0 +1,29 @@
+package com.example.demo.repository;
+
+import java.util.LinkedList;
+
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.domain.Contatto;;
+
+@Repository
+public class ContattoRepository {
+
+	private LinkedList<Contatto> contatti = new LinkedList<Contatto>();
+	
+	public ContattoRepository() {
+		//contatti = new LinkedList<Contatto>();
+		contatti.add(new Contatto("Marco","Rossi","023455436"));
+		contatti.add(new Contatto("Mario","Valsecchi","+391455436"));
+		contatti.add(new Contatto("Sara","Presazzi","08765432"));
+
+
+	}
+	
+	public LinkedList<Contatto> listaContatti(){
+		
+		return contatti;
+	}
+	
+
+}

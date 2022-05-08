@@ -1,0 +1,17 @@
+package com.example.demo.service;
+
+import org.springframework.stereotype.Service;
+
+import com.example.demo.repository.ContattoRepository;
+
+@Service
+public class ContattoService {
+	private final ContattoRepository contattoRepository;
+	
+	public ContattoService (ContattoRepository contattoRepository) {
+		this.contattoRepository = contattoRepository;
+	}
+	
+	
+	
+}

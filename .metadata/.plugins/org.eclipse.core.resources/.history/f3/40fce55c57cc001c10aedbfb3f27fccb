@@ -1,0 +1,64 @@
+package com.example.demo.controller;
+
+import java.util.LinkedList;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.domain.Contatto;
+import com.example.demo.repository.ContattoRepository;
+import com.example.demo.service.ContattoService;
+
+@RestController
+public class ContattoController {
+	
+	private ContattoService contattoService = new ContattoService(new ContattoRepository());
+	
+	@GetMapping("/contatti")
+	public LinkedList<Contatto> listaContatti () {
+		
+		return null;
+		
+		
+	}
+	
+	@GetMapping("/ricercaContatti")
+	public LinkedList<Contatto> ricerca(@RequestBody Contatto contatto) {
+		
+		return null;
+		
+	}
+	
+	
+	@PostMapping("/aggiungiContatto")
+	public ResponseEntity<Contatto> aggiungiContatto(@RequestBody Contatto contatto) {
+		//TODO: completare con i service
+		return new ResponseEntity<>(contatto, HttpStatus.CREATED);
+		
+	}
+	
+	@PutMapping("/modificaContatto/{id}")
+	public Contatto modificaContatto(@PathVariable String id, @RequestBody Contatto contatto) {
+		//TODO: completare con i service
+		
+		return contatto;
+	}
+
+
+	@DeleteMapping("/eliminaContatto/{id}")
+	public void eliminaContatto(@PathVariable Integer id) {
+		
+	}
+	
+	
+
+	
+
+}

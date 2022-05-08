@@ -1,9 +1,19 @@
 package com.example.demo.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Contatto {
 	
-	//create sequence
+	@Id 
+	@GeneratedValue (strategy = GenerationType.SEQUENCE)
+	@Column (name = "ID")
 	private Integer id; 
+	
 	
 	private String nome;
 	
@@ -11,11 +21,12 @@ public class Contatto {
 	
 	private String  telefono;
 
-	public Contatto(String nome, String cognome, String telefono) {
+	public Contatto(Integer id,String nome, String cognome, String telefono) {
 		
-		this.setNome(nome);
-		this.setCognome(cognome);
-		this.setTelefono(telefono);
+		this.id = id;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.telefono = telefono;
 	}
 	
 	public String getNome() {
@@ -45,3 +56,4 @@ public class Contatto {
 	
 	
 }
+
