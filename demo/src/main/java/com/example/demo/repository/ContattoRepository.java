@@ -4,12 +4,13 @@ import java.util.LinkedList;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.domain.Contatto;;
+import com.example.demo.domain.Contatto;
+import com.example.demo.exception.ContattoException;;
 
 @Repository
 public class ContattoRepository {
 
-	private LinkedList<Contatto> contatti = new LinkedList<Contatto>();
+	private LinkedList<Contatto> contatti = new LinkedList<>();
 	
 	public ContattoRepository() {
 		//contatti = new LinkedList<Contatto>();
@@ -25,23 +26,52 @@ public class ContattoRepository {
 		return contatti;
 	}
 	
-	public Contatto getContattoById(Integer id) {
-		Contatto contatto = null;
-
-		try {
-			contatto = contatti.get(id);
-			
-		}catch(IndexOutOfBoundsException e) {
-			e.printStackTrace();
-			
+	public Contatto getContattoById(Integer id) throws ContattoException {
+		for(Contatto c: contatti) {
+			if(c.getId() == id) {
+				return c;
+			}
 		}
+		throw new ContattoException("contatto con id: " + id + "non trovato");
 		
-		return contatto;
-		
-		//if (id >=1 && id<= contatti.size()) {
-		//	return contatti.get(id);
-		//}
-		//return null;
 	}
 
+	public Contatto addContatto(Contatto newContatto) {
+		
+		if(contatti.add(newContatto) == true) {
+			return newContatto;
+		}
+		
+		return null;
+		
+	}
+	
+	public Contatto modContatto(Contatto contatto, Integer id) {
+		
+		for(Contatto c: contatti) {
+			if(c.getId() == id ) {
+				
+				c.setNome(contatto.getNome());
+				c.setCognome(contatto.getCognome());
+				c.setTelefono(contatto.getTelefono());
+				return c;
+			}
+		}
+		
+		return null;	
+		
+	}
+	
+	public void eliminaContatto(Integer id) {
+		
+		for(Contatto c: contatti) {
+			if(c.getId() == id ) {
+				contatti.remove(contatti.indexOf(c));
+			}
+		}
+		return;
+		
+	}
+	
+	
 }

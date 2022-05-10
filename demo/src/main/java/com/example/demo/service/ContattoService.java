@@ -5,7 +5,8 @@ import java.util.LinkedList;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.ContattoRepository;
-import com.example.demo.domain.Contatto;;
+import com.example.demo.domain.Contatto;
+import com.example.demo.exception.ContattoException;;
 
 
 @Service
@@ -20,9 +21,23 @@ public class ContattoService {
 		return contattoRepository.listaContatti();
 	}
 	
-	public Contatto getContattoById(Integer id) {
-		Contatto contatto= contattoRepository.getContattoById(id) ;
-		return contatto;
-
+	public Contatto getContattoById(Integer id) throws ContattoException{
+		return contattoRepository.getContattoById(id);
 	}
+	
+	public Contatto addContatto(Contatto newContatto) {
+		return contattoRepository.addContatto(newContatto);
+	}
+	
+	public Contatto modContatto (Contatto contatto, Integer id) {
+		return contattoRepository.modContatto(contatto, id);
+	}
+	
+	public void eliminaContatto (Integer id) {
+		contattoRepository.eliminaContatto(id);
+		return;
+	}
+	
 }
+
+

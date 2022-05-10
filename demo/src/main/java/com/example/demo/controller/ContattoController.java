@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.Contatto;
+import com.example.demo.exception.ContattoException;
 import com.example.demo.repository.ContattoRepository;
 import com.example.demo.service.ContattoService;
 
@@ -31,40 +32,54 @@ public class ContattoController {
 
 		return new ResponseEntity<>(contattoService.listaContatti(),HttpStatus.OK);
 		
-		
 	}
 	
 	@GetMapping("/contatti/{id}")
 	public ResponseEntity<Contatto> contattoById(@PathVariable String id) {
-		Integer num = Integer.parseInt(id);
-		Contatto c = contattoService.getContattoById(num);
-		if(c != null) {
-			return new ResponseEntity<>(c,HttpStatus.OK);
+		try {
+			Integer num = Integer.parseInt(id);
+
+			Contatto c = contattoService.getContattoById(num);
+			return new ResponseEntity<>(c, HttpStatus.OK);
+
+		} catch (ContattoException e) {
+			//come utilizzare il messaggio della exception nella response?
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(c,HttpStatus.NOT_FOUND);
+
 		
 	}
 	
 	
-	@PostMapping("/aggiungiContatto")
+	@PostMapping("/contatti")
 	public ResponseEntity<Contatto> aggiungiContatto(@RequestBody Contatto contatto) {
-		//TODO: completare con i service
 		
-		return new ResponseEntity<>(contatto, HttpStatus.CREATED);
+		Contatto c = contattoService.addContatto(contatto);
 		
+		if(c != null) {
+			return new ResponseEntity<>(c,HttpStatus.CREATED);
+
+		}		
+		return new ResponseEntity<>(c,HttpStatus.NO_CONTENT);
 	}
 	
-	@PutMapping("/modificaContatto/{id}")
-	public Contatto modificaContatto(@PathVariable String id, @RequestBody Contatto contatto) {
-		//TODO: completare con i service
-		                                                                                                                                                                                                                                                                                                            
-		return contatto;
+	@PutMapping("/contatti/{id}")
+	public ResponseEntity<Contatto> modificaContatto(@PathVariable String id, @RequestBody Contatto contatto) {
+		Integer num = Integer.parseInt(id);
+
+		Contatto c = contattoService.modContatto(contatto, num);
+		if(c != null) {
+			return new ResponseEntity<>(c,HttpStatus.CREATED);
+
+		}
+		return new ResponseEntity<>(c,HttpStatus.NOT_MODIFIED);
 	}
 
 
-	@DeleteMapping("/eliminaContatto/{id}")
-	public void eliminaContatto(@PathVariable Integer id) {
-		
+	@DeleteMapping("/contatti/{id}")
+	public ResponseEntity<Object> eliminaContatto(@PathVariable Integer id) {
+		contattoService.eliminaContatto(id);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	
