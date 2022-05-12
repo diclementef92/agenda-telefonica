@@ -1,13 +1,11 @@
 package com.example.demo.domain;
 
-import java.util.LinkedList;
-
 public class Agenda {
 	private String utente;
 
 	private String nome;
 
-	private LinkedList<Contatto> contatti;
+	//private LinkedList<Contatto> contatti;
 	
 	public Agenda(String nome, String utente) {
 		this.utente = utente;
@@ -28,14 +26,6 @@ public class Agenda {
 
 	public void setUtente(String utente) {
 		this.utente = utente;
-	}
-
-	public LinkedList<Contatto> getContatti() {
-		return contatti;
-	}
-
-	public void setContatti(LinkedList<Contatto> contatti) {
-		this.contatti = contatti;
 	}
 
 }

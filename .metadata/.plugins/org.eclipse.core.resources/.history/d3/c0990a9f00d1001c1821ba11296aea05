@@ -25,15 +25,15 @@ public class ContattoService {
 		return contattoRepository.getContattoById(id);
 	}
 	
-	public Contatto addContatto(Contatto newContatto) throws ContattoException{
+	public Contatto addContatto(Contatto newContatto) {
 		return contattoRepository.addContatto(newContatto);
 	}
 	
-	public Contatto modContatto (Contatto contatto, Integer id) throws ContattoException{
+	public Contatto modContatto (Contatto contatto, Integer id) {
 		return contattoRepository.modContatto(contatto, id);
 	}
 	
-	public void eliminaContatto (Integer id) throws ContattoException {
+	public void eliminaContatto (Integer id) {
 		contattoRepository.eliminaContatto(id);
 		return;
 	}

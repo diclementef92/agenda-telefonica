@@ -78,7 +78,14 @@ public class ContattoRepository {
 			throw new ContattoException(ex.getMessage());
 		}
 		
-	
+		
+//		for(Contatto c: contatti) {
+//			if(c.getId() == id ) {
+//				contatti.remove(contatti.indexOf(c));
+//			}
+//		}
+//		return;
+		
 	}
 	
 	

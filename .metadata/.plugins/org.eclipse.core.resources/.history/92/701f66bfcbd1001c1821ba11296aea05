@@ -74,11 +74,15 @@ public class ContattoRepository {
 			contatti.remove(contatti.indexOf(c));
 		}catch(IndexOutOfBoundsException e) {
 			throw new ContattoException("id: " + id + " index out of bound");
-		}catch(Exception ex) {
-			throw new ContattoException(ex.getMessage());
 		}
 		
-	
+//		for(Contatto c: contatti) {
+//			if(c.getId() == id ) {
+//				contatti.remove(contatti.indexOf(c));
+//			}
+//		}
+//		return;
+		
 	}
 	
 	

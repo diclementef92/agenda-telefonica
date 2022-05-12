@@ -33,7 +33,7 @@ public class ContattoService {
 		return contattoRepository.modContatto(contatto, id);
 	}
 	
-	public void eliminaContatto (Integer id) throws ContattoException {
+	public void eliminaContatto (Integer id) {
 		contattoRepository.eliminaContatto(id);
 		return;
 	}

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.Contatto;
 import com.example.demo.exception.ContattoException;
+import com.example.demo.repository.ContattoRepository;
 import com.example.demo.service.ContattoService;
 
 @RestController
@@ -59,8 +60,7 @@ public class ContattoController {
 		}
 
 	}
-	//TODO: post di una lista contatti
-	
+
 	@PutMapping("/contatti/{id}")
 	public ResponseEntity<?> modificaContatto(@PathVariable String id, @RequestBody Contatto contatto) {
 		try {
@@ -79,12 +79,7 @@ public class ContattoController {
 
 	@DeleteMapping("/contatti/{id}")
 	public ResponseEntity<Object> eliminaContatto(@PathVariable Integer id) {
-		try {
-			contattoService.eliminaContatto(id);
-		} catch (ContattoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		contattoService.eliminaContatto(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 

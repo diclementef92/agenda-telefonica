@@ -46,7 +46,7 @@ public class ContattoRepository {
 		
 	}
 	
-	public Contatto modContatto(Contatto contatto, Integer id) throws ContattoException{
+	public Contatto modContatto(Contatto contatto, Integer id) {
 		
 		for(Contatto c: contatti) {
 			if(c.getId() == id ) {
@@ -64,21 +64,19 @@ public class ContattoRepository {
 			}
 		}
 		
-		throw new ContattoException("contatto: " + contatto.toString() + " non modificato");
+		return null;	
 		
 	}
 	
-	public void eliminaContatto(Integer id) throws ContattoException  {
-		try {
-			Contatto c = getContattoById(id);
-			contatti.remove(contatti.indexOf(c));
-		}catch(IndexOutOfBoundsException e) {
-			throw new ContattoException("id: " + id + " index out of bound");
-		}catch(Exception ex) {
-			throw new ContattoException(ex.getMessage());
-		}
+	public void eliminaContatto(Integer id) {
 		
-	
+		for(Contatto c: contatti) {
+			if(c.getId() == id ) {
+				contatti.remove(contatti.indexOf(c));
+			}
+		}
+		return;
+		
 	}
 	
 	

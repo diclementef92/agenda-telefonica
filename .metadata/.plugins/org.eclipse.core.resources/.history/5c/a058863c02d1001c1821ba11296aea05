@@ -14,25 +14,26 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.domain.Contatto;
 import com.example.demo.exception.ContattoException;
+import com.example.demo.repository.ContattoRepository;
 import com.example.demo.service.ContattoService;
 
 @RestController
 public class ContattoController {
-
+	
 	private final ContattoService contattoService;
-
+	
 	public ContattoController(ContattoService contattoService) {
 		this.contattoService = contattoService;
 
 	}
-
+	
 	@GetMapping("/contatti")
-	public ResponseEntity<LinkedList<Contatto>> listaContatti() {
+	public ResponseEntity<LinkedList<Contatto>> listaContatti () {
 
-		return new ResponseEntity<>(contattoService.listaContatti(), HttpStatus.OK);
-
+		return new ResponseEntity<>(contattoService.listaContatti(),HttpStatus.OK);
+		
 	}
-
+	
 	@GetMapping("/contatti/{id}")
 	public ResponseEntity<Contatto> contattoById(@PathVariable String id) {
 		try {
@@ -42,50 +43,55 @@ public class ContattoController {
 			return new ResponseEntity<>(c, HttpStatus.OK);
 
 		} catch (ContattoException e) {
-			// come utilizzare il messaggio della exception nella respone?
+			//come utilizzare il messaggio della exception nella respone?
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 
+		
 	}
-
+	
+	
 	@PostMapping("/contatti")
 	public ResponseEntity<Contatto> aggiungiContatto(@RequestBody Contatto contatto) {
 		try {
 			Contatto c = contattoService.addContatto(contatto);
 			return new ResponseEntity<>(c, HttpStatus.OK);
-
-		} catch (ContattoException e) {
-			return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+			
+		}catch(ContattoException e) {
+			return new ResponseEntity<>(c, HttpStatus.NOT_MODIFIED);
 		}
-
+		
+		
+		
+		
+//		if(c != null) {
+//			return new ResponseEntity<>(c,HttpStatus.CREATED);
+//
+//		}		
+//		return new ResponseEntity<>(c,HttpStatus.NO_CONTENT);
 	}
-	//TODO: post di una lista contatti
 	
 	@PutMapping("/contatti/{id}")
-	public ResponseEntity<?> modificaContatto(@PathVariable String id, @RequestBody Contatto contatto) {
-		try {
-			
-			Integer num = Integer.parseInt(id);
-	
-			Contatto c = contattoService.modContatto(contatto, num);
+	public ResponseEntity<Contatto> modificaContatto(@PathVariable String id, @RequestBody Contatto contatto) {
+		Integer num = Integer.parseInt(id);
+
+		Contatto c = contattoService.modContatto(contatto, num);
+		if(c != null) {
 			return new ResponseEntity<>(c,HttpStatus.CREATED);
 
-		}catch(ContattoException | NumberFormatException e) {
-			return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_MODIFIED);
-
 		}
-
+		return new ResponseEntity<>(c,HttpStatus.NOT_MODIFIED);
 	}
+
 
 	@DeleteMapping("/contatti/{id}")
 	public ResponseEntity<Object> eliminaContatto(@PathVariable Integer id) {
-		try {
-			contattoService.eliminaContatto(id);
-		} catch (ContattoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		contattoService.eliminaContatto(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+	
+	
+
+	
 
 }
