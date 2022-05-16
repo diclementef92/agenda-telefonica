@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +11,7 @@ import com.example.demo.exception.ContattoException;;
 @Repository
 public class ContattoRepository {
 
-	private LinkedList<Contatto> contatti = new LinkedList<>();
+	private List<Contatto> contatti = new LinkedList<>();
 	
 	public ContattoRepository() {
 		
@@ -18,10 +19,9 @@ public class ContattoRepository {
 		contatti.add(new Contatto(2,"Mario","Valsecchi","+391455436"));
 		contatti.add(new Contatto(3,"Sara","Presazzi","08765432"));
 
-
 	}
 	
-	public LinkedList<Contatto> listaContatti(){
+	public List<Contatto> listaContatti(){
 		
 		return contatti;
 	}
@@ -32,7 +32,7 @@ public class ContattoRepository {
 				return c;
 			}
 		}
-		throw new ContattoException("contatto con id: " + id + "non trovato");
+		throw new ContattoException("contatto con id: " + id + " non trovato");
 		
 	}
 

@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +27,14 @@ public class ContattoController {
 	}
 
 	@GetMapping("/contatti")
-	public ResponseEntity<LinkedList<Contatto>> listaContatti() {
+	public ResponseEntity<List<Contatto>> listaContatti() {
 
 		return new ResponseEntity<>(contattoService.listaContatti(), HttpStatus.OK);
 
 	}
 
 	@GetMapping("/contatti/{id}")
-	public ResponseEntity<Contatto> contattoById(@PathVariable String id) {
+	public ResponseEntity<?> contattoById(@PathVariable String id) {
 		try {
 			Integer num = Integer.parseInt(id);
 
@@ -42,8 +42,7 @@ public class ContattoController {
 			return new ResponseEntity<>(c, HttpStatus.OK);
 
 		} catch (ContattoException e) {
-			// come utilizzare il messaggio della exception nella respone?
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
 		}
 
 	}
@@ -71,7 +70,7 @@ public class ContattoController {
 			return new ResponseEntity<>(c,HttpStatus.CREATED);
 
 		}catch(ContattoException | NumberFormatException e) {
-			return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_MODIFIED);
+			return new ResponseEntity<>(e.getMessage() + e.toString(),HttpStatus.NOT_MODIFIED);
 
 		}
 
@@ -81,11 +80,12 @@ public class ContattoController {
 	public ResponseEntity<Object> eliminaContatto(@PathVariable Integer id) {
 		try {
 			contattoService.eliminaContatto(id);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		} catch (ContattoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		
+		
 	}
 
 }

@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class ContattoService {
 		this.contattoRepository = contattoRepository;
 	}
 	
-	public LinkedList<Contatto> listaContatti(){
+	public List<Contatto> listaContatti(){
 		return contattoRepository.listaContatti();
 	}
 	

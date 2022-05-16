@@ -4,18 +4,20 @@ import com.example.demo.domain.Contatto;
 
 public class ContattoException extends Exception {
 
-	private String message;
+	private static final long serialVersionUID = -6313123886849911204L;
+
+	private String message = "ContattoException: ";
 
 	private Contatto contatto;
 
 	public ContattoException (String m,Contatto c) {
 		this.contatto = c;
-		this.message = m;
+		this.message += m;
 		
 	}
 	
 	public ContattoException (String m) {
-		this.message = m;
+		this.message += m;
 		
 	}
 	
