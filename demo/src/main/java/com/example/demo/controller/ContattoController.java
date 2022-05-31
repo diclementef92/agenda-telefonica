@@ -36,6 +36,7 @@ public class ContattoController {
 	@GetMapping("/contatti/{id}")
 	public ResponseEntity<?> contattoById(@PathVariable String id) {
 		try {
+			
 			Integer num = Integer.parseInt(id);
 
 			Contatto c = contattoService.getContattoById(num);

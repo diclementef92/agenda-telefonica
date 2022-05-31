@@ -1,13 +1,14 @@
 package com.example.demo.domain;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class Agenda {
 	private String utente;
 
 	private String nome;
 
-	private LinkedList<Contatto> contatti;
+	private List<Contatto> contatti;
 	
 	public Agenda(String nome, String utente) {
 		this.utente = utente;
@@ -30,7 +31,7 @@ public class Agenda {
 		this.utente = utente;
 	}
 
-	public LinkedList<Contatto> getContatti() {
+	public List<Contatto> getContatti() {
 		return contatti;
 	}
 

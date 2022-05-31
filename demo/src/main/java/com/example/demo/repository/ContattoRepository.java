@@ -11,21 +11,31 @@ import com.example.demo.exception.ContattoException;;
 @Repository
 public class ContattoRepository {
 
-	private List<Contatto> contatti = new LinkedList<>();
+	private List<Contatto> contatti ;
 	
 	public ContattoRepository() {
 		
 		contatti.add(new Contatto(1,"Marco","Rossi","023455436"));
-		contatti.add(new Contatto(2,"Mario","Valsecchi","+391455436"));
+		contatti.add(new Contatto(2,"Mario","Valsecchi","+39345543620"));
 		contatti.add(new Contatto(3,"Sara","Presazzi","08765432"));
 
 	}
-	
+
+	/**
+	 * restituisce tutta la lista contatti
+	 * @return lista contatti
+	 */
 	public List<Contatto> listaContatti(){
 		
 		return contatti;
 	}
 	
+	/**
+	 * Restituisce un contatto dato un id 
+	 * @param id Contatto 
+	 * @return Contatto  se trovato
+	 * @throws ContattoException se non trovato
+	 * */
 	public Contatto getContattoById(Integer id) throws ContattoException {
 		for(Contatto c: contatti) {
 			if(c.getId() == id) {
@@ -36,6 +46,12 @@ public class ContattoRepository {
 		
 	}
 
+	/**
+	 * Aggiunge un nuovo contatto
+	 * @param newContatto da aggiungere 
+	 * @return contatto aggiunto
+	 * @throws ContattoException se non aggiunto
+	 */
 	public Contatto addContatto(Contatto newContatto) throws ContattoException {
 		
 		if(contatti.add(newContatto) == true) {
@@ -46,6 +62,13 @@ public class ContattoRepository {
 		
 	}
 	
+	/**
+	 * Modifica un contatto 
+	 * @param contatto con dati modificati
+	 * @param id del contatto da modificare
+	 * @return contatto modifiicato
+	 * @throws ContattoException se non modificato
+	 */
 	public Contatto modContatto(Contatto contatto, Integer id) throws ContattoException{
 		
 		for(Contatto c: contatti) {
@@ -68,6 +91,11 @@ public class ContattoRepository {
 		
 	}
 	
+	/**
+	 * Elimina un contatto per id
+	 * @param id del contatto da eliminare
+	 * @throws ContattoException se errore 
+	 */
 	public void eliminaContatto(Integer id) throws ContattoException  {
 		try {
 			Contatto c = getContattoById(id);
